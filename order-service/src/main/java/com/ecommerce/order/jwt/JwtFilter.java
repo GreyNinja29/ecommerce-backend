@@ -19,6 +19,7 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Date;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -54,11 +55,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 Long userId=claims.get("userId",Long.class);
                 String role=claims.get("role",String.class);
+                Date expiration=claims.getExpiration();
 
                 System.out.println("user Id:"+userId);
                 System.out.println("Role:"+role);
 
-                if(role!=null) {
+                if(role!=null && expiration.after(new Date())) {
 
 
 
@@ -74,7 +76,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     );
 
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                 
+
 
                 }
 

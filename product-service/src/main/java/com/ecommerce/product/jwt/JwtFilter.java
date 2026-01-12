@@ -18,6 +18,7 @@ import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Date;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -52,8 +53,9 @@ public class JwtFilter extends OncePerRequestFilter {
                     .getPayload();
 
             String role = claims.get("role", String.class);
+            Date expiration=claims.getExpiration();
 
-            if (role != null) {
+            if (role != null && expiration.after(new Date())) {
                 // add ROLE_ prefix if it is not present cause the spring security
                 //AuthorizationFilter when looking for roles finds with this prefix
 
