@@ -25,14 +25,16 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     CustomUserDetails customUserDetails;
 
+    // this enables the user to access endpoints without entering credential with the use of jwt
+    // as this jwt filter runs before the UsernamePasswordFilter of spring
+    //this jwtFilter sets the SecurityContextHolder so that when the UsernamePasswordFilter checks the SecurityContext
+    // it will see that the current request/thread is already authenticated !!
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-//        if (request.getServletPath().startsWith("/auth/")) {
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
+
 
         String auth=request.getHeader("Authorization");
 
