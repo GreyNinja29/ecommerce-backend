@@ -5,10 +5,13 @@ import com.ecommerce.product.dto.AddProductDto;
 import com.ecommerce.product.dto.UpdateProdDto;
 import com.ecommerce.product.model.Product;
 import com.ecommerce.product.repository.ProductRepo;
+import com.mongodb.client.result.UpdateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -129,6 +132,32 @@ public class ProductService {
 
         return new ResponseEntity<>(prod,HttpStatus.OK);
 
+
+
+
+    }
+
+
+    public ResponseEntity<?> reduceStock(String prodId,int quant) {
+
+        //we are doing this as to lock the document for concurrency as doing this will allow us to
+        //send only one request to db but performing the selection and reducing operations in single call
+
+        //which will allow only one user to update the same product
+
+        Query query=new Query();
+        query.addCriteria(Criteria.where("_id").is(prodId));
+        query.addCriteria(Criteria.where("stock").gte(quant));
+
+        Update update=new Update().inc("stock",-quant);
+
+        UpdateResult result=mongoTemplate.updateFirst(query,update,Product.class);
+
+        if(result.getModifiedCount()==0) {
+            throw new RuntimeException("Insufficient stock for product Id:"+prodId);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
 
 
 

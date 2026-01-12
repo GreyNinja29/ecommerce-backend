@@ -54,6 +54,14 @@ public class ProductController {
     }
 
 
+    //Endpoint for the order-service to reduce the stock upon purchasing
+
+
+    @PutMapping("/reduce-quantity/{prodId}")
+    public ResponseEntity<?> reduceStock(@PathVariable String prodId,@RequestParam int quant) {
+
+        return productService.reduceStock(prodId,quant);
+    }
 
 
 
