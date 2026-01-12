@@ -35,20 +35,20 @@ public class ProductController {
         return productService.searchProducts(keyword);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public ResponseEntity<?> addProd(@Validated @RequestBody AddProductDto addProductDto) {
         return productService.addProd(addProductDto);
 
     }
 
-    @PutMapping("/update")
+    @PutMapping("/admin/update")
     public ResponseEntity<?> updateProd(@Validated @RequestBody UpdateProdDto updateProdDto) {
 
         return productService.updateProd(updateProdDto);
 
     }
 
-    @DeleteMapping("/{prodId}")
+    @DeleteMapping("/admin/{prodId}")
     public ResponseEntity<?> deleteProd(@PathVariable String prodId) {
         return productService.deleteProd(prodId);
     }
