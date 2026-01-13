@@ -51,10 +51,10 @@ Follow these instructions to set up the project locally on your machine.
 * MongoDB (Running on port `27017`)
 
 ### 1. Clone the Repository
-```
-bash git clone [https://github.com/yourusername/ecommerce-backend.git](https://github.com/yourusername/ecommerce-backend.git)
-cd ecommerce-backend
 
+```
+git clone https://github.com/GreyNinja29/ecommerce-backend.git
+cd ecommerce-backend
 ```
 
 
