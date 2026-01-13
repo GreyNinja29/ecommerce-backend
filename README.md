@@ -2,7 +2,10 @@
 
 A robust, scalable, and secure backend system for an e-commerce platform built using **Java** and **Spring Boot**. This project demonstrates a distributed microservices architecture with **Service Discovery**, **API Gateway**, and **Polyglot Persistence**.
 
-![Architecture Diagram](./architecture-diagram.png)
+### System Architecture
+
+[Architecture Diagram](./architecture-diagram.png)
+*Figure 1: High-level architecture showing the request flow from the API Gateway to microservices (User, Product, Order) and their interactions with the Discovery Server and Databases.*
 
 
 ## 🚀 Key Features
