@@ -4,7 +4,7 @@ A robust, scalable, and secure backend system for an e-commerce platform built u
 
 ### System Architecture
 
-[Architecture Diagram](./architecture-diagram.png)
+![Architecture Diagram](./architecture-diagram.png)
 *Figure 1: High-level architecture showing the request flow from the API Gateway to microservices (User, Product, Order) and their interactions with the Discovery Server and Databases.*
 
 
